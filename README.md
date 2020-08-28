@@ -1,41 +1,118 @@
 <!-- Please do not change this logo with link -->
 [![MCHP](images/microchip.png)](https://www.microchip.com)
 
-# Update the title for avr128db48-cnano-opamp-demo-fw-mplab here
+# AVR128DB48 Curiosity Nano OPAMP Demonstration Firmware
 
-<!-- This is where the introduction to the example goes, including mentioning the peripherals used -->
+The AVR128DB48 Curiosity Nano Evaluation Kit is preprogramed to provide a number of different OPAMP configurations, depending on the state of the three input pins PC4, PC5 and PC6. Each of these pins is internally pulled high, If left unconnected the corresponding pin is high and reads logic '1'. Connect the pin directly to ground for logic '0'.
+
+In addition to the OPAMP configuration the onboard LED0 will blink a number of times equal to the current setting. To check current setting and/or reconfigure, click the on board switch(SW0).
+
+![Modes of Operation](images/modes_of_operation.png)
 
 ## Related Documentation
 
-<!-- Any information about an application note or tech brief can be linked here. Use unbreakable links!
-     In addition a link to the device family landing page and relevant peripheral pages as well:
-     - [AN3381 - Brushless DC Fan Speed Control Using Temperature Input and Tachometer Feedback](https://microchip.com/00003381/)
-     - [PIC18F-Q10 Family Product Page](https://www.microchip.com/design-centers/8-bit/pic-mcus/device-selection/pic18f-q10-product-family) -->
+* [AVR128DB48 Curiosity Nano User Guide](https://microchip.com/DSxxxxxxxxxx) <!-- TODO: Update link once assigned -->
+* [AVR128DB48 Device Page](https://www.microchip.com/wwwproducts/en/AVR128DB48)
 
 ## Software Used
 
-<!-- All software used in this example must be listed here. Use unbreakable links!
-     - MPLAB® X IDE 5.30 or newer [(microchip.com/mplab/mplab-x-ide)](http://www.microchip.com/mplab/mplab-x-ide)
-     - MPLAB® XC8 2.10 or a newer compiler [(microchip.com/mplab/compilers)](http://www.microchip.com/mplab/compilers)
-     - MPLAB® Code Configurator (MCC) 3.95.0 or newer [(microchip.com/mplab/mplab-code-configurator)](https://www.microchip.com/mplab/mplab-code-configurator)
-     - MPLAB® Code Configurator (MCC) Device Libraries PIC10 / PIC12 / PIC16 / PIC18 MCUs [(microchip.com/mplab/mplab-code-configurator)](https://www.microchip.com/mplab/mplab-code-configurator)
-     - Microchip PIC18F-Q Series Device Support (1.4.109) or newer [(packs.download.microchip.com/)](https://packs.download.microchip.com/) -->
+* [MPLAB� X IDE](https://www.microchip.com/mplab/mplab-x-ide) 5.40 or later
+* [MPLAB� XC8](https://www.microchip.com/mplab/compilers) 2.20 or later
+* MPLAB� X AVR-Dx_DFP version 1.4.75 or later
+* For the Atmel Studio version of this project, please go to [this repository](https://github.com/microchip-pic-avr-examples/avr128db48-cnano-opamp-demo-fw-studio)
+
 
 ## Hardware Used
 
-<!-- All hardware used in this example must be listed here. Use unbreakable links!
-     - PIC18F47Q10 Curiosity Nano [(DM182029)](https://www.microchip.com/Developmenttools/ProductDetails/DM182029)
-     - Curiosity Nano Base for Click boards™ [(AC164162)](https://www.microchip.com/Developmenttools/ProductDetails/AC164162)
-     - POT Click board™ [(MIKROE-3402)](https://www.mikroe.com/pot-click) -->
+* [AVR128DB48 Curiosity Nano](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/EV35L43A)
 
 ## Setup
 
-<!-- Explain how to connect hardware and set up software. Depending on complexity, step-by-step instructions and/or tables and/or images can be used -->
+A brand new AVR128DB48 Curiosity Nano comes with this code in this repository already programmed.
+It can be reprogrammed to the AVR128DB48 by copying the [hex file](Debug/avr128db48-cnano-opamp-demo-fw.hex) to the CURIOSITY virtual drive.
+It is also possible to open the .atsln file and program the device using Atmel Studio 7.
 
 ## Operation
 
-<!-- Explain how to operate the example. Depending on complexity, step-by-step instructions and/or tables and/or images can be used -->
+The AVR128DB48 is in standby sleep mode with the OPAMPs enabled in between reconfiguration of the OPAMPs.
 
-## Summary
+| PC6 | PC5 | PC4 | Configuration                  |  
+| --- | --- | --- | -------------                  |
+|  1  |  1  |  0  | 1 - Connected directly to pins |
+|  1  |  0  |  1  | 2 - Voltage follower           |
+|  1  |  0  |  0  | 3 - Non-Inverting PGA          |
+|  0  |  1  |  1  | 4 - Inverting PGA              |
+|  0  |  1  |  0  | 5 - Differential amplifier     |
+|  0  |  0  |  1  | 6 - Instrumentation amplifier  |  
 
-<!-- Summarize what the example has shown -->
+If the pins PC4, PC5 and PC6 has a different configuration than in the table above, the AVR defaults to Configuration 1, Connected directly to pins.
+
+#### OPAMP Pins on AVR128DB48
+
+| OPAMP | Positive input (INP) | Negative input (INN) | Output (OUT) |
+| ----- | -------------------- | -------------------- | ------------ |
+| OP0   |         PD1          |          PD3         |     PD2      |
+| OP1   |         PD4          |          PD7         |     PD5      |
+| OP2   |         PE1          |          PE3         |     PE2      |
+
+### Configuration 1: Connected Directly to Pins
+
+In the *Connected directly to pins* configuration each of the internal op amp inputs and outputs are connected directly to the corresponding I/O pins. This means that each op amp can be used as a standalone op amp with use of external discrete components to achieve a specific functionality.
+
+![Connected directly to pins](images/OPn_PinConnected.png)
+
+### Configuration 2: Voltage Follower
+
+In the *Voltage follower* mode each op amp is configured as voltage followers, this means that INP and the OUT are connected to the I/O pins while INN is internally connected to the op amp output. 
+
+![Voltage follower](images/OPn_VoltageFollower.png)
+
+### Configuration 3: Non-Inverting PGA (Programable Gain Amplifier)
+
+In the *Non-inverting PGA* mode each op amp is configured as non-inverting PGA using the internal resistor lader. INP and the OUT are connected to the I/O pins. Each the op amp is configured with different gain as listed below: 
+
+| OPAMP  | Gain | Positive input (INP) | Output (OUT) |
+| :----: | :--: | :------------------: | :----------: |
+| OP0    |  4x  |         PD1          |     PD2      |
+| OP1    |  8x  |         PD4          |     PD5      |
+| OP2    | 16x  |         PE1          |     PE2      |
+
+![Non-Inverting PGA](images/OPn_NonInvertingPGA.png)
+
+### Configuration 4: Inverting PGA
+
+In the *Inverting PGA* configuration each of the OPAMPs are configured as inverting PGAs using the internal resistor lader.
+
+Each op amp is configured with different gain as listed below:
+
+| OPAMP  | Gain |   RESMUXBOT (Vin)   | Output (OUT) |
+| :----: | :--: | :-----------------: | :----------: |
+| OP0    |  -3x |        PD1          |     PD2      |
+| OP1    |  -7x |        PD4          |     PD5      |
+| OP2    | -15x |        PE1          |     PE2      |
+
+![Inverting PGA](images/OPn_InvertingPGA.png)
+
+### Configuration 5: Differential Amplifier
+
+In the *Differential amplifier* configuration OPAMP0 and OPAMP1 is set up as a differential amplifier with a gain of 15x and the following inpup/outut pins:
+
+| V1 input | V2 input | Output |
+| -------- | -------- | ------ |
+|   PD1    |   PD4    |   PD5  |
+
+![Differential amplifier](images/OPn_TwoOaDiffAmp.png)
+
+OPAMP2 is configured to be connected directly to its pins, listed above in section "OPAMP Pin connections"
+
+### Configuration 6: Instrumentation Amplifier
+
+In the *Instrumentation amplifier* configuration all three OPAMPs are needed. The OPAMPs are connected as shown in the figure below.
+
+| V1 input | V2 input | Output |
+| -------- | -------- | ------ |
+|   PD4    |   PD1    |   PE2  |
+
+The gain is set through a combination of OP1 and OP2 resistor ladder network. The gain of the *Instrumentation amplifier* configuration has been selected to be x15.
+
+![Instrumentation amplifier](images/OPn_InstruAmplifier.png)
