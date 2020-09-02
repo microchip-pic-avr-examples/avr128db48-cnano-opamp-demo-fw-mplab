@@ -11,14 +11,14 @@ In addition to the OPAMP configuration the onboard LED0 will blink a number of t
 
 ## Related Documentation
 
-* [AVR128DB48 Curiosity Nano User Guide](https://microchip.com/DSxxxxxxxxxx) <!-- TODO: Update link once assigned -->
+* [AVR128DB48 Curiosity Nano User Guide](https://www.microchip.com/DS50003037)
 * [AVR128DB48 Device Page](https://www.microchip.com/wwwproducts/en/AVR128DB48)
 
 ## Software Used
 
-* [MPLAB® X IDE](https://www.microchip.com/mplab/mplab-x-ide) 5.40 or later
-* [MPLAB® XC8](https://www.microchip.com/mplab/compilers) 2.20 or later
-* MPLAB® X AVR-Dx_DFP version 1.4.75 or later
+* [MPLABÂ® X IDE](https://www.microchip.com/mplab/mplab-x-ide) 5.40 or later
+* [MPLABÂ® XC8](https://www.microchip.com/mplab/compilers) 2.20 or later
+* MPLABÂ® X AVR-Dx_DFP version 1.4.75 or later
 * For the Atmel Studio version of this project, please go to [this repository](https://github.com/microchip-pic-avr-examples/avr128db48-cnano-opamp-demo-fw-studio)
 
 
@@ -95,7 +95,7 @@ Each op amp is configured with different gain as listed below:
 
 ### Configuration 5: Differential Amplifier
 
-In the *Differential amplifier* configuration OPAMP0 and OPAMP1 is set up as a differential amplifier with a gain of 15x and the following inpup/outut pins:
+In the *Differential amplifier* configuration OPAMP0 and OPAMP1 is set up as a differential amplifier with a gain of 15x and the following input/output pins:
 
 | V1 input | V2 input | Output |
 | -------- | -------- | ------ |
