@@ -29,7 +29,7 @@ In addition to the OPAMP configuration the onboard LED0 will blink a number of t
 ## Setup
 
 A brand new AVR128DB48 Curiosity Nano comes with this code in this repository already programmed.
-It can be reprogrammed to the AVR128DB48 by copying the [hex file](\avr128db48-cnano-opamp-demo-fw-mplab.X\dist\free\production\avr128db48-cnano-opamp-demo-fw-mplab.X.production.hex) to the CURIOSITY virtual drive.
+It can be reprogrammed to the AVR128DB48 by copying the [hex file](avr128db48-cnano-opamp-demo-fw-mplab.X/dist/free/production/avr128db48-cnano-opamp-demo-fw-mplab.X.production.hex) to the CURIOSITY virtual drive.
 It is also possible to open the .X file and program the device using the MPLAB® X IDE.
 
 ## Operation
